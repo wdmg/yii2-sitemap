@@ -1,0 +1,38 @@
+{
+  "name": "wdmg/yii2-sitemap",
+  "description": "Sitemap manager",
+  "keywords": ["yii2", "yii2-sitemap", "sitemap", "manager", "wdmg"],
+  "type": "yii2-extension",
+  "license": "MIT",
+  "version": "0.0.1",
+  "homepage": "https://github.com/wdmg/yii2-sitemap",
+  "support": {
+    "source": "https://github.com/wdmg/yii2-sitemap",
+    "issues": "https://github.com/wdmg/yii2-sitemap/issues"
+  },
+  "authors": [
+    {
+      "name": "Alexsander Vyshnyvetskyy",
+      "email": "alex.vyshnyvetskyy@gmail.com"
+    },
+    {
+      "name": "W.D.M.Group, Ukraine",
+      "email": "wdmg.com.ua@gmail.com"
+    }
+  ],
+  "require": {
+    "yiisoft/yii2": "^2.0.20",
+    "wdmg/yii2-base": "^1.1.4"
+  },
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "wdmg\\sitemap\\": ""
+    }
+  },
+  "extra": {
+    "options": {
+      "routePrefix": "admin"
+    }
+  }
+}
