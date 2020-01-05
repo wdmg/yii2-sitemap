@@ -4,7 +4,7 @@
   "keywords": ["yii2", "yii2-sitemap", "sitemap", "manager", "wdmg"],
   "type": "yii2-extension",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "homepage": "https://github.com/wdmg/yii2-sitemap",
   "support": {
     "source": "https://github.com/wdmg/yii2-sitemap",
@@ -22,7 +22,7 @@
   ],
   "require": {
     "yiisoft/yii2": "^2.0.20",
-    "wdmg/yii2-base": "^1.1.4"
+    "wdmg/yii2-base": "^1.1.6"
   },
   "minimum-stability": "dev",
   "autoload": {
@@ -32,7 +32,12 @@
   },
   "extra": {
     "options": {
-      "routePrefix": "admin"
+      "routePrefix": "admin",
+      "supportModels": {
+        "pages": "wdmg\\pages\\models\\Pages",
+        "news": "wdmg\\news\\models\\News"
+      },
+      "cacheExpire": 43200
     }
   }
 }
