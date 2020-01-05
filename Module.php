@@ -54,8 +54,7 @@ class Module extends BaseModule
     /**
      * @var int sitemap cache lifetime, `0` - for not use cache
      */
-    //public $cacheExpire = 43200; // 12 hr.
-    public $cacheExpire = 0; // 12 hr.
+    public $cacheExpire = 43200; // 12 hr.
 
     /**
      * @var string the module version
