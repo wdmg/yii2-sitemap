@@ -5,6 +5,12 @@
     <url>
         <loc><?php echo $item['url']; ?></loc>
         <lastmod><?php echo $item['updated_at']; ?></lastmod>
+<?php if (isset($item['changefreq'])) : ?>
+        <changefreq><?php echo $item['changefreq']; ?></changefreq>
+<?php endif; ?>
+<?php if (isset($item['priority'])) : ?>
+        <priority><?php echo $item['priority']; ?></priority>
+<?php endif; ?>
     </url>
 <?php endif; ?><?php endforeach; ?>
 </urlset>

@@ -6,6 +6,7 @@ use Yii;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\helpers\ArrayHelper;
+use wdmg\sitemap\models\Sitemap;
 
 /**
  * DefaultController implements actions
@@ -21,12 +22,14 @@ class DefaultController extends Controller
      * @return string
      */
     public function actionSitemap() {
+
+        $model = new Sitemap();
         if ($this->module->cacheExpire !== 0 && ($cache = Yii::$app->getCache())) {
-            $items = $cache->getOrSet(md5('sitemap'), function () {
-                return $this->getSitemapItems();
+            $items = $cache->getOrSet(md5('sitemap'), function () use ($model) {
+                return $model->getSitemapItems();
             }, intval($this->module->cacheExpire));
         } else {
-            $items = $this->getSitemapItems();
+            $items = $model->getSitemapItems();
         }
 
         Yii::$app->response->format = Response::FORMAT_RAW;
@@ -34,31 +37,5 @@ class DefaultController extends Controller
         return $this->renderPartial('sitemap', [
             'items' => $items
         ]);
-    }
-
-    /**
-     * Forms an array of items for building a sitemap
-     *
-     * @return array
-     */
-    private function getSitemapItems() {
-        $items = [];
-        if (is_array($models = $this->module->supportModels)) {
-            foreach ($models as $name => $class) {
-                if (class_exists($class)) {
-                    $append = [];
-                    $model = new $class();
-                    foreach ($model->getPublished(['in_sitemap' => true]) as $item) {
-                        $append[] = [
-                            'url' => ($item->url) ? $item->url : false,
-                            'updated_at' => ($item->updated_at) ? $item->updated_at : false
-                        ];
-                    };
-                    $items = ArrayHelper::merge($items, $append);
-                }
-            }
-        }
-
-        return $items;
     }
 }

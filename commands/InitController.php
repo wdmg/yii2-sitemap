@@ -33,7 +33,7 @@ class InitController extends Controller
             '║                                                ║'. "\n" .
             '║            SITEMAP MODULE, v.'.$version.'             ║'. "\n" .
             '║          by Alexsander Vyshnyvetskyy           ║'. "\n" .
-            '║       (c) 2020-2019 W.D.M.Group, Ukraine       ║'. "\n" .
+            '║       (c) 2019-2020 W.D.M.Group, Ukraine       ║'. "\n" .
             '║                                                ║'. "\n" .
             '╚════════════════════════════════════════════════╝';
         echo $name = $this->ansiFormat($welcome . "\n\n", Console::FG_GREEN);
@@ -60,7 +60,7 @@ class InitController extends Controller
                     echo $this->ansiFormat("An error occurred while cleaning a sitemap cache.\n\n", Console::FG_RED);
                 }
             } else {
-                echo $this->ansiFormat("Error! Cache component not configured in application.\n\n", Console::FG_RED);
+                echo $this->ansiFormat("Error! Cache component not configured in the application.\n\n", Console::FG_RED);
             }
         } else {
             echo $this->ansiFormat("Error! Your selection has not been recognized.\n\n", Console::FG_RED);

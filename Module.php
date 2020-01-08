@@ -6,7 +6,7 @@ namespace wdmg\sitemap;
  * Yii2 Sitemap manager
  *
  * @category        Module
- * @version         1.0.0
+ * @version         1.1.0
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-sitemap
  * @copyright       Copyright (c) 2019 W.D.M.Group, Ukraine
@@ -17,6 +17,7 @@ namespace wdmg\sitemap;
 use Yii;
 use wdmg\base\BaseModule;
 use yii\base\InvalidConfigException;
+use yii\helpers\Url;
 
 /**
  * Sitemap module definition class
@@ -54,12 +55,29 @@ class Module extends BaseModule
     /**
      * @var int sitemap cache lifetime, `0` - for not use cache
      */
-    public $cacheExpire = 43200; // 12 hr.
+    public $cacheExpire = 43200;
+
+    /**
+     * @var string default update frequency for sitemap.xml items
+     * See https://www.sitemaps.org/protocol.html#xmlTagDefinitions
+     */
+    public $defaultFrequency = 'weekly';
+
+    /**
+     * @var float default update priority for sitemap.xml items
+     * See https://www.sitemaps.org/protocol.html#xmlTagDefinitions
+     */
+    public $defaultPriority = 0.5;
+
+    /**
+     * @var string default route to rendered sitemap.xml (use "/" - for root)
+     */
+    public $sitemapRoute = "/";
 
     /**
      * @var string the module version
      */
-    private $version = "1.0.0";
+    private $version = "1.1.0";
 
     /**
      * @var integer, priority of initialization
@@ -78,6 +96,9 @@ class Module extends BaseModule
 
         // Set priority of current module
         $this->setPriority($this->priority);
+
+        // Process and normalize route for sitemap in frontend
+        $this->sitemapRoute = self::normalizeRoute($this->sitemapRoute);
 
     }
 
@@ -108,11 +129,29 @@ class Module extends BaseModule
         if (isset(Yii::$app->params["sitemap.cacheExpire"]))
             $this->cacheExpire = Yii::$app->params["sitemap.cacheExpire"];
 
+        if (isset(Yii::$app->params["sitemap.defaultFrequency"]))
+            $this->defaultFrequency = Yii::$app->params["sitemap.defaultFrequency"];
+
+        if (isset(Yii::$app->params["sitemap.defaultPriority"]))
+            $this->defaultPriority = Yii::$app->params["sitemap.defaultPriority"];
+
+        if (isset(Yii::$app->params["sitemap.sitemapRoute"]))
+            $this->sitemapRoute = Yii::$app->params["sitemap.sitemapRoute"];
+
         if (!isset($this->supportModels))
             throw new InvalidConfigException("Required module property `supportModels` isn't set.");
 
         if (!isset($this->cacheExpire))
             throw new InvalidConfigException("Required module property `cacheExpire` isn't set.");
+
+        if (!isset($this->defaultFrequency))
+            throw new InvalidConfigException("Required module property `defaultFrequency` isn't set.");
+
+        if (!isset($this->defaultPriority))
+            throw new InvalidConfigException("Required module property `defaultPriority` isn't set.");
+
+        if (!isset($this->sitemapRoute))
+            throw new InvalidConfigException("Required module property `sitemapRoute` isn't set.");
 
         if (!is_array($this->supportModels))
             throw new InvalidConfigException("Module property `supportModels` must be array.");
@@ -120,15 +159,39 @@ class Module extends BaseModule
         if (!is_integer($this->cacheExpire))
             throw new InvalidConfigException("Module property `cacheExpire` must be integer.");
 
+        if (!is_string($this->defaultFrequency))
+            throw new InvalidConfigException("Module property `defaultFrequency` must be a string.");
+
+        if (!in_array($this->defaultFrequency, ['always', 'hourly', 'daily', 'weekly', 'monthly', 'yearly', 'never']))
+            throw new InvalidConfigException("Module property `defaultFrequency` must be one of the values: always, hourly, daily, weekly, monthly, yearly, never.");
+
+        if (!is_float($this->defaultPriority))
+            throw new InvalidConfigException("Module property `defaultPriority` must be float integer.");
+
+        if (!is_string($this->sitemapRoute))
+            throw new InvalidConfigException("Module property `sitemapRoute` must be a string.");
+
         // Add route to pass sitemap.xml in frontend
-        $app->getUrlManager()->addRules([
-            [
-                'pattern' => 'sitemap',
-                'route' => 'admin/sitemap/default',
-                'suffix' => '.xml'
-            ],
-            'sitemap' => 'admin/sitemap/default',
-        ], true);
+        $sitemapRoute = $this->sitemapRoute;
+        if (empty($sitemapRoute) || $sitemapRoute == "/") {
+            $app->getUrlManager()->addRules([
+                [
+                    'pattern' => '/sitemap',
+                    'route' => 'admin/sitemap/default',
+                    'suffix' => '.xml'
+                ],
+                '/sitemap' => 'admin/sitemap/default'
+            ], true);
+        } else if (is_string($sitemapRoute)) {
+            $app->getUrlManager()->addRules([
+                [
+                    'pattern' => $sitemapRoute . '/sitemap',
+                    'route' => 'admin/sitemap/default',
+                    'suffix' => '.xml'
+                ],
+                $sitemapRoute . '/sitemap' => 'admin/sitemap/default'
+            ], true);
+        }
 
         // Attach to events of create/change/remove of models for the subsequent clearing cache of sitemap
         if (!($app instanceof \yii\console\Application)) {
@@ -149,5 +212,21 @@ class Module extends BaseModule
                 }
             }
         }
+    }
+
+    /**
+     * Generate current sitemap.xml URL
+     *
+     * @return null|string
+     */
+    public function getSitemapURL() {
+        $url = null;
+        $sitemapRoute = $this->sitemapRoute;
+        if (empty($sitemapRoute) || $sitemapRoute == "/") {
+            $url = Url::to('/sitemap.xml', true);
+        } else {
+            $url = Url::to($sitemapRoute . '/sitemap.xml', true);
+        }
+        return $url;
     }
 }
