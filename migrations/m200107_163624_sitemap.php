@@ -21,7 +21,7 @@ class m200107_163624_sitemap extends Migration
         $this->createTable('{{%sitemap}}', [
             'id' => $this->primaryKey(),
 
-            'url' => $this->string(255)->notNull(),
+            'url' => $this->string(255)->unique()->notNull(),
             'changefreq' => $this->string(16)->notNull(),
             'priority' => $this->double(2)->notNull()->defaultValue(1),
 

@@ -12,9 +12,9 @@ use yii\filters\AccessControl;
 use wdmg\sitemap\models\SitemapSearch;
 
 /**
- * SitemapController implements the CRUD actions
+ * ListController implements the CRUD actions
  */
-class SitemapController extends Controller
+class ListController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -97,7 +97,7 @@ class SitemapController extends Controller
                     'success',
                     Yii::t('app/modules/sitemap', 'Sitemap URL has been successfully added!')
                 );
-                return $this->redirect(['sitemap/index']);
+                return $this->redirect(['list/index']);
             } else {
                 Yii::$app->getSession()->setFlash(
                     'danger',
@@ -126,7 +126,7 @@ class SitemapController extends Controller
                     'success',
                     Yii::t('app/modules/sitemap', 'Sitemap URL has been successfully updated!')
                 );
-                return $this->redirect(['sitemap/index']);
+                return $this->redirect(['list/index']);
             } else {
                 Yii::$app->getSession()->setFlash(
                     'danger',
@@ -167,7 +167,7 @@ class SitemapController extends Controller
             }
         }
 
-        return $this->redirect(['sitemap/index']);
+        return $this->redirect(['list/index']);
     }
 
     /**
@@ -196,7 +196,7 @@ class SitemapController extends Controller
             );
         }
 
-        return $this->redirect(['sitemap/index']);
+        return $this->redirect(['list/index']);
     }
 
     /**

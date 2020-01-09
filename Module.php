@@ -32,7 +32,7 @@ class Module extends BaseModule
     /**
      * {@inheritdoc}
      */
-    public $defaultRoute = "sitemap/index";
+    public $defaultRoute = "list/index";
 
     /**
      * @var string, the name of module
@@ -109,9 +109,9 @@ class Module extends BaseModule
     {
         $items = [
             'label' => $this->name,
-            'url' => [$this->routePrefix . '/'. $this->id],
             'icon' => 'fa-sitemap',
-            'active' => in_array(\Yii::$app->controller->module->id, [$this->id])
+            'url' => [$this->routePrefix . '/'. $this->id],
+            'active' => (in_array(\Yii::$app->controller->module->id, [$this->id]) &&  Yii::$app->controller->id == 'list'),
         ];
         return $items;
     }
@@ -180,7 +180,7 @@ class Module extends BaseModule
                     'route' => 'admin/sitemap/default',
                     'suffix' => '.xml'
                 ],
-                '/sitemap' => 'admin/sitemap/default'
+                '/sitemap.xml' => 'admin/sitemap/default'
             ], true);
         } else if (is_string($sitemapRoute)) {
             $app->getUrlManager()->addRules([
@@ -189,7 +189,7 @@ class Module extends BaseModule
                     'route' => 'admin/sitemap/default',
                     'suffix' => '.xml'
                 ],
-                $sitemapRoute . '/sitemap' => 'admin/sitemap/default'
+                $sitemapRoute . '/sitemap.xml' => 'admin/sitemap/default'
             ], true);
         }
 

@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model wdmg\sitemap\models\Sitemap */
 
 $this->title = Yii::t('app/modules/sitemap', 'Add new URL');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/sitemap', 'Sitemap'), 'url' => ['sitemap/index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/sitemap', 'Sitemap'), 'url' => ['list/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sitemap-header">

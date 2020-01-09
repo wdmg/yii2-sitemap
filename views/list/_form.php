@@ -10,7 +10,8 @@ use wdmg\widgets\SelectInput;
 ?>
 <div class="sitemap-form">
     <?php $form = ActiveForm::begin([
-        'id' => "addSitemapURLForm"
+        'id' => "addSitemapURLForm",
+        /*'enableAjaxValidation' => true*/
     ]); ?>
     <?= $form->field($model, 'url'); ?>
     <?= $form->field($model, 'changefreq')->widget(SelectInput::class, [
@@ -22,7 +23,7 @@ use wdmg\widgets\SelectInput;
     <?= $form->field($model, 'priority'); ?>
     <hr/>
     <div class="form-group">
-        <?= Html::a(Yii::t('app/modules/sitemap', '&larr; Back to list'), ['sitemap/index'], ['class' => 'btn btn-default pull-left']) ?>&nbsp;
+        <?= Html::a(Yii::t('app/modules/sitemap', '&larr; Back to list'), ['list/index'], ['class' => 'btn btn-default pull-left']) ?>&nbsp;
         <?= Html::submitButton(Yii::t('app/modules/sitemap', 'Save'), ['class' => 'btn btn-success pull-right']) ?>
     </div>
     <?php ActiveForm::end(); ?>

@@ -108,11 +108,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'urlCreator' => function($action, $data, $key, $index) {
                     if ($action == 'update') {
                         if (isset($data['id']))
-                            return ['sitemap/update', 'id' => $data['id']];
+                            return ['list/update', 'id' => $data['id']];
                         else
-                            return ['sitemap/create', 'url' => $data['url']];
+                            return ['list/create', 'url' => $data['url']];
                     } else if ($action == 'delete' && isset($data['id'])) {
-                        return ['sitemap/delete', 'id' => $data['id']];
+                        return ['list/delete', 'id' => $data['id']];
                     }
                 },
                 'visibleButtons' => [
@@ -133,8 +133,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <hr/>
     <div>
         <div class="btn-group">
-            <?= Html::a(Yii::t('app/modules/sitemap', 'Clear cache'), ['sitemap/clear'], ['class' => 'btn btn-info']) ?>
-            <?= Html::a(Yii::t('app/modules/sitemap', 'Delete all URL'), ['sitemap/delete', 'id' => 'all'], [
+            <?= Html::a(Yii::t('app/modules/sitemap', 'Clear cache'), ['list/clear'], ['class' => 'btn btn-info']) ?>
+            <?= Html::a(Yii::t('app/modules/sitemap', 'Delete all URL'), ['list/delete', 'id' => 'all'], [
                 'class' => 'btn btn-danger',
                 'data' => [
                     'confirm' => Yii::t('app/modules/sitemap', 'Are you really sure you want to delete all URLs? This action does not affect the URLs that are generated in automatic mode.'),
@@ -142,7 +142,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ]) ?>
         </div>
-        <?= Html::a(Yii::t('app/modules/sitemap', 'Add URL'), ['sitemap/create'], ['class' => 'btn btn-success pull-right']) ?>
+        <?= Html::a(Yii::t('app/modules/sitemap', 'Add URL'), ['list/create'], ['class' => 'btn btn-success pull-right']) ?>
     </div>
     <?php Pjax::end(); ?>
 </div>

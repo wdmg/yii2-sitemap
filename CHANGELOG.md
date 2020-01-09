@@ -2,6 +2,7 @@ Changelog
 =========
 
 ## 1.1.0 (2020-01-09)
+ * Added validation rules for URL`s
  * Added CRUD for edit sitemap URL`s
  
 ## 1.0.0 (2020-01-05)

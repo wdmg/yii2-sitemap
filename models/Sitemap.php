@@ -7,7 +7,8 @@ use yii\db\Expression;
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
-use wdmg\helpers\ArrayHelper;
+use yii\httpclient\Client;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%sitemap}}".
@@ -88,10 +89,12 @@ class Sitemap extends ActiveRecord
     {
         $rules = [
             [['url', 'changefreq', 'priority'], 'required'],
-            [['url'], 'string', 'max' => 255],
-            [['changefreq'], 'string', 'max' => 16],
+            ['url', 'unique', 'message' => Yii::t('app/modules/sitemap', 'The sitemap URL must be unique.'), 'on' => 'create'],
+            ['url', 'string', 'max' => 255],
+            ['url', 'checkSitemapUrl'],
+            ['changefreq', 'string', 'max' => 16],
             ['changefreq', 'in', 'range' => $this->getFrequencyList(false, true)],
-            [['priority'], 'double', 'min' => 0.0, 'max' => 1.0],
+            ['priority', 'double', 'min' => 0.0, 'max' => 1.0],
             [['created_at', 'updated_at'], 'safe'],
         ];
 
@@ -100,6 +103,22 @@ class Sitemap extends ActiveRecord
         }
 
         return $rules;
+    }
+
+    /**
+     * Check sitemap URL has be exist
+     * @param $attribute
+     * @param $params
+     * @param $validator
+     */
+    public function checkSitemapUrl($attribute, $params, $validator) {
+        if ($this->url) {
+            $client = new Client();
+            $response = $client->get($this->url)->send();
+            if (!$response->isOk && !(intval($response->headers["http-code"]) == 200 || intval($response->headers["http-code"]) == 301)) {
+                $this->addError('url', Yii::t('app/modules/sitemap', 'The sitemap URL must be exist and returning 200/301 HTTP code.'));
+            }
+        }
     }
 
     /**

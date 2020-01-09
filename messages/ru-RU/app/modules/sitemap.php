@@ -50,6 +50,9 @@ return [
     'Sitemap URL has been successfully updated!' => 'URL-адрес карты сайта был успешно обновлен!',
     'An error occurred while update the URL from sitemap.' => 'Произошла ошибка при обновлении URL в карту сайта',
 
+    'The sitemap URL must be unique.' => 'URL-адрес карты сайта должен быть уникальным.',
+    'The sitemap URL must be exist and returning 200/301 HTTP code.' => 'URL-адрес карты сайта должен существовать и возвращать 200/301 HTTP-код.',
+
     'OK! URL successfully deleted from sitemap.' => 'OK! URL успешно удален из карты сайта.',
     'OK! All URL`s successfully deleted from sitemap.' => 'OK! Все URL успешно удалены из карты сайта.',
     'An error occurred while deleting a URL from sitemap.' => 'Произошла ошибка при удалении URL из карты сайта.',
