@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 1.1.1 (2020-03-25)
+ * Added pagination
+ * Html encode for url`s in xml
+ 
 ## 1.1.0 (2020-01-09)
  * Added validation rules for URL`s
  * Added CRUD for edit sitemap URL`s

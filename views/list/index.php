@@ -129,6 +129,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],
         ],
+        'pager' => [
+            'options' => [
+                'class' => 'pagination',
+            ],
+            'maxButtonCount' => 5,
+            'activePageCssClass' => 'active',
+            'prevPageCssClass' => '',
+            'nextPageCssClass' => '',
+            'firstPageCssClass' => 'previous',
+            'lastPageCssClass' => 'next',
+            'firstPageLabel' => Yii::t('app/modules/sitemap', 'First page'),
+            'lastPageLabel'  => Yii::t('app/modules/sitemap', 'Last page'),
+            'prevPageLabel'  => Yii::t('app/modules/sitemap', '&larr; Prev page'),
+            'nextPageLabel'  => Yii::t('app/modules/sitemap', 'Next page &rarr;')
+        ],
     ]); ?>
     <hr/>
     <div>

@@ -39,6 +39,11 @@ return [
     'Update URL' => 'Редактирование URL',
     'Add new URL' => 'Добавление URL',
 
+    'First page' => 'Первая страница',
+    'Last page' => 'Последняя страница',
+    '&larr; Prev page' => '&larr; Предыдущая страница',
+    'Next page &rarr;' => 'Следующая страница &rarr;',
+
     'Sitemap of the current site is available at: {url}' => 'Карта сайта текущего сайта доступна по адресу: {url}',
 
     'Sitemap cache has been successfully flushing!' => 'Кэш карты сайта успешно очищен!',

@@ -1,4 +1,4 @@
-[![Yii2](https://img.shields.io/badge/required-Yii2_v2.0.20-blue.svg)](https://packagist.org/packages/yiisoft/yii2)
+[![Yii2](https://img.shields.io/badge/required-Yii2_v2.0.33-blue.svg)](https://packagist.org/packages/yiisoft/yii2)
 [![Github all releases](https://img.shields.io/github/downloads/wdmg/yii2-sitemap/total.svg)](https://GitHub.com/wdmg/yii2-sitemap/releases/)
 ![Progress](https://img.shields.io/badge/progress-ready_to_use-green.svg)
 [![GitHub license](https://img.shields.io/github/license/wdmg/yii2-sitemap.svg)](https://github.com/wdmg/yii2-sitemap/blob/master/LICENSE)
@@ -19,7 +19,7 @@ In addition, you can add/edit and delete the URL of sitemap in manual mode.
 
 # Requirements 
 * PHP 5.6 or higher
-* Yii2 v.2.0.20 and newest
+* Yii2 v.2.0.33 and newest
 * [Yii2 Base](https://github.com/wdmg/yii2-base) module (required)
 * [Yii2 SelectInput](https://github.com/wdmg/yii2-selectinput) widget
 * [Yii2 Options](https://github.com/wdmg/yii2-options) module (optionality)
@@ -81,6 +81,7 @@ Use the `Module::dashboardNavItems()` method of the module to generate a navigat
     ?>
 
 # Status and version [ready to use]
+* v.1.1.1 - Added pagination
 * v.1.1.0 - Added CRUD for edit sitemap URL`s
 * v.1.0.0 - Added support for Pages and News models
 * v.0.0.1 - Initial commit. Added console, migrations and controller
