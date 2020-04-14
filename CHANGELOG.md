@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 1.1.2 (2020-04-14)
+ * Added support for Blog module, fixed models items retrieved
+
 ## 1.1.1 (2020-03-25)
  * Added pagination
  * Html encode for url`s in xml

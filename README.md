@@ -81,6 +81,7 @@ Use the `Module::dashboardNavItems()` method of the module to generate a navigat
     ?>
 
 # Status and version [ready to use]
+* v.1.1.2 - Added support for Blog module, fixed models items retrieved
 * v.1.1.1 - Added pagination
 * v.1.1.0 - Added CRUD for edit sitemap URL`s
 * v.1.0.0 - Added support for Pages and News models
