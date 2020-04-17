@@ -3,6 +3,7 @@
 namespace wdmg\sitemap\models;
 
 use Yii;
+use yii\db\AfterSaveEvent;
 use yii\db\Expression;
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
@@ -80,6 +81,33 @@ class Sitemap extends ActiveRecord
         ];
 
         return $behaviors;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function afterRefresh()
+    {
+        self::clearCache();
+        parent::afterRefresh();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+        self::clearCache();
+        parent::afterSave($insert, $changedAttributes);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function afterDelete()
+    {
+        self::clearCache();
+        parent::afterDelete();
     }
 
     /**
@@ -282,5 +310,14 @@ class Sitemap extends ActiveRecord
             return $this->hasOne(\wdmg\users\models\Users::class, ['id' => 'updated_by']);
         else
             return null;
+    }
+
+    /**
+     * Clear the runtime cache for build sitemap
+     */
+    public static function clearCache() {
+        if ($cache = Yii::$app->getCache()) {
+            $cache->delete(md5('sitemap'));
+        }
     }
 }
