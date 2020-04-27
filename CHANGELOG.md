@@ -2,7 +2,7 @@ Changelog
 =========
 
 ## 1.1.3 (2020-04-28)
- * Clear the runtime cache
+ * Update README.md and dependencies
  
 ## 1.1.2 (2020-04-17)
  * Clear the runtime cache
