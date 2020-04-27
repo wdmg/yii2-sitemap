@@ -1,8 +1,8 @@
 [![Yii2](https://img.shields.io/badge/required-Yii2_v2.0.33-blue.svg)](https://packagist.org/packages/yiisoft/yii2)
-[![Github all releases](https://img.shields.io/github/downloads/wdmg/yii2-sitemap/total.svg)](https://GitHub.com/wdmg/yii2-sitemap/releases/)
+[![Downloads](https://img.shields.io/packagist/dt/wdmg/yii2-sitemap.svg)](https://packagist.org/packages/wdmg/yii2-sitemap)
+[![Packagist Version](https://img.shields.io/packagist/v/wdmg/yii2-sitemap.svg)](https://packagist.org/packages/wdmg/yii2-sitemap)
 ![Progress](https://img.shields.io/badge/progress-ready_to_use-green.svg)
 [![GitHub license](https://img.shields.io/github/license/wdmg/yii2-sitemap.svg)](https://github.com/wdmg/yii2-sitemap/blob/master/LICENSE)
-![GitHub release](https://img.shields.io/github/release/wdmg/yii2-sitemap/all.svg)
 
 # Yii2 Sitemap
 The module polls supported data models and displays links to their representations for front-ends and search engines.
@@ -25,6 +25,7 @@ In addition, you can add/edit and delete the URL of sitemap in manual mode.
 * [Yii2 Options](https://github.com/wdmg/yii2-options) module (optionality)
 * [Yii2 Pages](https://github.com/wdmg/yii2-pages) module (support)
 * [Yii2 News](https://github.com/wdmg/yii2-news) module (support)
+* [Yii2 Blog](https://github.com/wdmg/yii2-blog) module (support)
 
 # Installation
 To install the module, run the following command in the console:
@@ -81,6 +82,7 @@ Use the `Module::dashboardNavItems()` method of the module to generate a navigat
     ?>
 
 # Status and version [ready to use]
+* v.1.1.3 - Update README.md and dependencies
 * v.1.1.2 - Added support for Blog module, fixed models items retrieved
 * v.1.1.1 - Added pagination
 * v.1.1.0 - Added CRUD for edit sitemap URL`s

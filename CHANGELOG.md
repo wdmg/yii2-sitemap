@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 1.1.3 (2020-04-28)
+ * Clear the runtime cache
+ 
 ## 1.1.2 (2020-04-17)
  * Clear the runtime cache
  * Added support for Blog module, fixed models items retrieved
